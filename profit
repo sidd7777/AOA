@@ -1,0 +1,73 @@
+#include<stdio.h>
+void main()
+{
+	char Item[5],item;
+	float Ratio,profit,total_weight,wt,temp,Profit[5],Wt[5],profit_made,ratio[5],weight,new_weight=0;
+	int i,j,n;
+	printf("ENTER THE NUMBER OF ITEMS : ");
+	scanf("%d",&n);	
+	printf("\nENTER THE TOTAL WEIGHT : ");
+	scanf("%f",&total_weight);
+	for(i=0;i<n;i++)
+	{
+		//printf("FOR ITEM : %c",65+i);
+		//scanf("%c",&Item[i]);
+		printf("\nENTER PROFIT : ");
+		scanf("%f",&Profit[i]);
+		printf("ENTER WEIGHT OF THE ITEM : ");
+		scanf("%f",&Wt[i]);
+		ratio[i]=Profit[i]/Wt[i];	
+		printf("RATIO : %f",ratio[i]);
+	}
+
+	for(j=0;j<n;j++)
+	{
+		for(i=0;i<n;i++)
+		{
+			if(ratio[i]<ratio[i+1])
+			{	
+				temp = ratio[i];
+				ratio[i] = ratio[i+1];
+				ratio[i+1] = temp;
+
+				profit = Profit[i];
+				Profit[i] = Profit[i+1];
+				Profit[i+1] = profit;
+					
+				/*item = Item[i];
+				Item[i] = Item[i+1];
+				Item[i+1] = item;*/
+		
+				wt = Wt[i];
+				Wt[i] = Wt[i+1];
+				Wt[i+1] = wt;
+			}
+		}	
+	}	
+	printf("\n\t\tPROFIT\t\tWEIGHT\t\t\tRATIO\n");
+	for(i=0;i<n;i++)
+	{
+		printf("\n\t\t%f\t%f\t\t%f",Profit[i],Wt[i],ratio[i]);
+	}
+	
+	for(i=0;i<n;i++)
+	{
+		if(Wt[i] <= total_weight)
+		{
+			total_weight=total_weight - Wt[i];
+			profit_made=profit_made+Profit[i];
+		}
+		else
+		{
+			Ratio = total_weight/Wt[i];
+			profit_made = profit_made + Profit[i]*Ratio;
+			break;
+		}
+	
+	}	
+	printf("\nTOTAL PROFIT MADE = %f\n",profit_made);
+}
+
+
+
+
